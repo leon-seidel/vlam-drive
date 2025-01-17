@@ -262,7 +262,7 @@ class LocalPlanner(object):
             control.steer = 0.0
             control.throttle = 0.0
             control.brake = 1.0
-            control.hand_brake = False
+            control.hand_brake = True
             control.manual_gear_shift = False
         else:
             self.target_waypoint, self.target_road_option = self._waypoints_queue[0]

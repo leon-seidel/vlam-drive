@@ -24,6 +24,8 @@ class Vehicle:
         # Add camera
         camera_init_trans = Transform(Location(x=5.5, z=3.0), Rotation(pitch=0))
         camera_bp = self.world.get_blueprint_library().find('sensor.camera.rgb')
+        camera_bp.set_attribute('image_size_x', '1280')
+        camera_bp.set_attribute('image_size_y', '720')
         camera = self.world.spawn_actor(camera_bp, camera_init_trans, attach_to=ego_vehicle)
         camera.listen(self.process_image)
 
@@ -33,16 +35,20 @@ class Vehicle:
         return ego_vehicle, camera, agent
 
     def drive_to_next_waypoint(self):
-        # Get next waypoint, refine it with the map and set it as destination
+        # Get next waypoint and drive there
         next_wp_location = self.wp_handler.get_next_waypoint().location
-        refined_next_wp_location = self.map.get_waypoint(next_wp_location).transform.location
-        self.agent.set_destination(refined_next_wp_location)
-        
+        self.drive_to_location(next_wp_location)
+
+    def drive_to_location(self, location):
+        # Refine location with the map and set it as destination
+        refined_location = self.map.get_waypoint(location).transform.location
+        self.agent.set_destination(refined_location)
+
         # Release brake and hand brake
         self.ego_vehicle.apply_control(VehicleControl(brake=0.0, hand_brake=False))
         
         # Drive until waypoint is reached
-        print("Driving...")
+        print("\nDriving...")
         while True:
             if self.agent.done():
                 # Set brake and handbrake

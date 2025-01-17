@@ -1,48 +1,30 @@
-import carla
-import math
-import random
+from vlm_drive.simulation.carla_sim import CarlaSim
+from vlm_drive.simulation.vehicle import Vehicle
+from vlm_drive.simulation.waypoint_handler import WaypointHandler
+from vlm_drive.model.vlam import VisionLanguageActionModel
 import time
-import queue
-import numpy as np
-import cv2
 
-client = carla.Client('localhost', 2000)
-client.set_timeout(10.0)
-world  = client.get_world()
-bp_lib = world.get_blueprint_library()
+carla_sim = CarlaSim()
+wp_handler = WaypointHandler(start_waypoint="start", first_goal_waypoint="first_sign")
+vehicle = Vehicle(carla_sim, wp_handler)
+vlam = VisionLanguageActionModel(backend="google", temperature=0.0)
 
-# Get the map spawn points
-spawn_points = world.get_map().get_spawn_points()
+instruction = "Please drive this vehicle to Mine B."
 
-# spawn vehicle
-vehicle_blueprints = world.get_blueprint_library().filter('*vehicle*')
-vehicle = world.try_spawn_actor(random.choice(vehicle_blueprints), random.choice(spawn_points))
+print("\nStarting navigation")
+while True:        
+    # Drive to destination and take an image
+    vehicle.drive_to_next_waypoint()
+    destination_image = vehicle.get_current_frame()
+    # display(destination_image)
+    
+    destination_reached, direction_decision = vlam.consult(destination_image, instruction)
 
-# spawn camera
-camera_bp = bp_lib.find('sensor.camera.rgb')
-camera_init_trans = carla.Transform(carla.Location(z=2))
-camera = world.spawn_actor(camera_bp, camera_init_trans, attach_to=vehicle)
-# vehicle.set_autopilot(True)
+    if not destination_reached:
+        wp_handler.update_next_wp_from_direction(direction_decision)
+    else:
+        print("Destination reached!")
+        break
 
-# Set up the simulator in synchronous mode
-settings = world.get_settings()
-settings.synchronous_mode = True # Enables synchronous mode
-settings.fixed_delta_seconds = 0.05
-world.apply_settings(settings)
-
-# Create a queue to store and retrieve the sensor data
-image_queue = queue.Queue()
-camera.listen(image_queue.put)
-
-
-while True:
-    world.tick()
-    image = image_queue.get()
-
-    # Reshape the raw data into an RGB array
-    img = np.reshape(np.copy(image.raw_data), (image.height, image.width, 4)) 
-
-    # Display the image in an OpenCV display window
-    cv2.namedWindow('ImageWindowName', cv2.WINDOW_AUTOSIZE)
-    cv2.imshow('ImageWindowName',img)
-    cv2.waitKey(1)
+time.sleep(10)
+vehicle.destroy()
