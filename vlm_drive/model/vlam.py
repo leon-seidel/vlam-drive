@@ -25,4 +25,4 @@ class VisionLanguageActionModel:
         answer_dict = json.loads(answer)
         print(f"VLAM output:", answer_dict, "\n")
         
-        return answer_dict["destination_reached"], answer_dict["direction"]
+        return answer_dict["destination_reached"], answer_dict["direction"], answer_dict["reasononing"]

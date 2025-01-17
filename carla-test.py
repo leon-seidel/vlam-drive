@@ -18,7 +18,7 @@ while True:
     destination_image = vehicle.get_current_frame()
     # display(destination_image)
     
-    destination_reached, direction_decision = vlam.consult(destination_image, instruction)
+    destination_reached, direction_decision, reasoning = vlam.consult(destination_image, instruction)
 
     if not destination_reached:
         wp_handler.update_next_wp_from_direction(direction_decision)

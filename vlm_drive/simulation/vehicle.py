@@ -9,8 +9,8 @@ class Vehicle:
         # Initialize vehicle
         self.wp_handler = waypoint_handler
         self.world, self.map = carla_sim.world, carla_sim.map
-        self.ego_vehicle, self.camera, self.agent = self.create_vehicle(vehicle_bp, target_speed)
         self.image_queue = queue.Queue(1)
+        self.ego_vehicle, self.camera, self.agent = self.create_vehicle(vehicle_bp, target_speed)
 
     def create_vehicle(self, vehicle_bp, target_speed):
         # Spawn vehicle
