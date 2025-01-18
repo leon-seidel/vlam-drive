@@ -4,17 +4,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vlm-drive"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Leon Seidel", email="leon.seidel@fau.de" },
 ]
-description = "VLM drive"
+description = "VLM drive - Vision Language Model for Autonomous Mining Vehicle Navigation"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
     "carla>=0.10.0",
@@ -22,15 +25,30 @@ dependencies = [
     "openai",
     "Pillow",
     "pydantic-settings",
-    "pyyaml"
+    "pyyaml",
+    "numpy",
+    "networkx",
+    "shapely",
+    "python-dotenv",
 ]
 
 [tool.setuptools]
 packages = ["vlm_drive"]
+include-package-data = true
 
 [tool.setuptools.package-data]
 "vlm_drive.config" = ["*.yaml"]
+"vlm_drive.images" = ["*.png"]
 
 [project.urls]
 Homepage = "https://github.com/leon-seidel/vlms/vlm-drive"
 Issues = "https://github.com/leon-seidel/vlm-drive/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black",
+    "isort",
+    "flake8",
+    "mypy",
+]
