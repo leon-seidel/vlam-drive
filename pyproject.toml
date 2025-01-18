@@ -32,9 +32,9 @@ dependencies = [
     "python-dotenv",
 ]
 
-[tool.setuptools]
-packages = ["vlm_drive"]
-include-package-data = true
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vlm_drive*"]
 
 [tool.setuptools.package-data]
 "vlm_drive.config" = ["*.yaml"]
