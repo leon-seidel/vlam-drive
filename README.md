@@ -1,10 +1,10 @@
-# Autonomous navigation for mining vehicles in Carla simulator
-
-Demo of using Vision Language Action Models for autonomous navigation between waypoints using road signs. The user can give an instruction in natural language like:
+# VLAM-based navigation for mining vehicles in Carla UE5.5 simulator
+![Demo Image](/media/carla_sim_mine.png)
+Demo of using Vision Language Action Models for autonomous navigation between waypoints using simple road signs. The user can give an instruction in natural language like:
 ```
 "Drive the vehicle to Mine B."
 ```
-The VLAM receives an image at each waypoint and decides the direction to drive, if the destination has been reached and adds its reasoning. A waypoint handler translates this information into the next waypoint for a Carla agent. 
+The VLAM receives an image from an onboard camera at each waypoint and decides the direction to drive, if the destination has been reached and adds its reasoning. A waypoint handler translates this information into the next waypoint for a Carla agent, where the VLAM kicks in again. 
 
 ## Demo run
 ![Demo Image](/media/mine_B-1.PNG)
@@ -57,4 +57,3 @@ You can then run the VLM drive navigation with a custom instruction in natural l
 python run_vlm_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
 Happy driving!
-![Demo Image](/media/carla_sim_mine.png)
