@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class NavDescription(BaseModel):
-            reasononing: str
+            reasoning: str
             direction: str
             destination_reached: bool
 
@@ -14,7 +14,7 @@ the instructed destination. The mines itself have a sign without a direction.
 At every sign you are prompted to give a direction out of "right", "left" and "straight", a short reasoning for your decision
 in the following JSON schema and wheter you reached the given destination:
 
-{{"reasononing": brief sentence, "direction": "right OR left OR straight", "destination_reached": true/false}}
+{{"reasoning": brief sentence, "direction": "right OR left OR straight", "destination_reached": true/false}}
 
 Start with the reasoning to come to a conclusion before deciding on the direction.
 """

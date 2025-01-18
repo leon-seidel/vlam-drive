@@ -1,17 +1,17 @@
 from openai import OpenAI
 import time
 from PIL import Image
-import base64
-from io import BytesIO
-from os import environ
+from vlm_drive.config import settings
+from vlm_drive.model.utils import pil_image_to_base64
 
 class VLLMAPI:
-    def __init__(self, api_url="http://localhost:8000/v1", temperature=0.5):
+    def __init__(self):
         # Setup VLM API
-        api_key = str(environ.get("VLLM_API_KEY"))      # Usually not needed
-        self.temperature = temperature
+        base_url = settings.vllm_base_url
+        api_key = settings.vllm_api_key      # Usually not needed
+        self.temperature = settings.vlam_temperature
         self.connection_timeout = 5  # Time to wait before trying to connect again
-        self.vlm_client, self.model_name = self.connect_to_vlm(api_url, api_key)
+        self.vlm_client, self.model_name = self.connect_to_vlm(base_url, api_key)
 
     def connect_to_vlm(self, api_url, api_key):
         while True:
@@ -26,7 +26,8 @@ class VLLMAPI:
                 time.sleep(self.connection_timeout)
                 continue   
     
-    def generate_structured_response_from_pil_image(self, full_prompt: str, pil_image: Image.Image, response_schema):
+    def generate_structured_response_from_pil_image(self, full_prompt: str, pil_image: Image.Image, 
+                                                    response_schema: type) -> str:
         chat_completion_from_base64 = self.vlm_client.chat.completions.create(
             messages=self.create_vlm_messages(full_prompt, pil_image),
             model=self.model_name,
@@ -37,8 +38,8 @@ class VLLMAPI:
         )
         return chat_completion_from_base64.choices[0].message.content
 
-    def create_vlm_messages(self, full_prompt: str, pil_image: Image.Image):
-        image_url = f"data:image/jpeg;base64,{self.pil_image_to_base64(pil_image)}"
+    def create_vlm_messages(self, full_prompt: str, pil_image: Image.Image) -> list[dict]:
+        image_url = f"data:image/jpeg;base64,{pil_image_to_base64(pil_image)}"
         messages=[
                     {
                     "role": "user",
@@ -58,7 +59,3 @@ class VLLMAPI:
                 ]
         return messages
     
-    def pil_image_to_base64(self, pil_image):
-        buffered = BytesIO()
-        pil_image.save(buffered, format="PNG")
-        return base64.b64encode(buffered.getvalue()).decode('utf-8')

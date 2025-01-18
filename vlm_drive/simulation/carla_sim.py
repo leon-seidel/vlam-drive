@@ -1,16 +1,15 @@
 import carla
+from vlm_drive.config import settings
 
 class CarlaSim:
-    def __init__(self, world_name="/Game/Carla/Maps/Mine_01"):
+    def __init__(self):
         # Connect to the client and retrieve the world object
-        self.client = carla.Client('localhost', 2000)
+        self.client = carla.Client(settings.carla_host, settings.carla_port)
+        self.client.load_world(settings.carla_world_name)
         self.world = self.client.get_world()
-        self.client.load_world(world_name)
 
-        # Create map and traffic manager
+        # Create map
         self.map = self.world.get_map()
-        self.traffic_manager = self.client.get_trafficmanager(8000)
-        self.tm_port = self.traffic_manager.get_port()
 
         # Get the blueprint library
         self.blueprint_library = self.world.get_blueprint_library()

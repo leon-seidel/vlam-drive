@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm-drive"
+version = "0.0.2"
+authors = [
+  { name="Leon Seidel", email="leon.seidel@fau.de" },
+]
+description = "VLM drive"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "carla>=0.10.0",
+    "google-genai",
+    "openai",
+    "Pillow",
+    "pydantic-settings",
+    "pyyaml"
+]
+
+[tool.setuptools]
+packages = ["vlm_drive"]
+
+[tool.setuptools.package-data]
+"vlm_drive.config" = ["*.yaml"]
+
+[project.urls]
+Homepage = "https://github.com/leon-seidel/vlms/vlm-drive"
+Issues = "https://github.com/leon-seidel/vlm-drive/issues"

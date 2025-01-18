@@ -1,0 +1,80 @@
+waypoints:
+    start: 
+        transform: 
+            x: -300.2
+            y: -287.8
+            z: 82.5
+            yaw: 0.0
+        next_waypoints: 
+            straight: first_sign
+
+    first_sign:
+        transform: 
+            x: -140
+            y: -224
+            z: 76
+            yaw: 25
+        next_waypoints: 
+            left: first_left_goal
+            straight: second_sign
+    
+    first_left_goal:
+        transform: 
+            x: 237.9
+            y: -267.5
+            z: 80
+            yaw: 90
+        next_waypoints: 
+
+    second_sign:
+        transform: 
+            x: 163.0
+            y: -31.4
+            z: -20
+            yaw: 40
+        next_waypoints: 
+            straight: second_straight_goal
+            right: second_right_goal
+    
+    second_straight_goal:
+        transform: 
+            x: 51
+            y: 181
+            z: -39
+            yaw: 180
+        next_waypoints:
+    
+    second_right_goal:
+        transform: 
+            x: 46
+            y: 74
+            z: -57
+            yaw: 180
+        next_waypoints:
+    
+    mid1:
+        transform: 
+            x: -60.4
+            y: 260.8
+            z: 36
+            yaw: 180
+        next_waypoints:
+            straight: mid2
+    
+    mid2:
+        transform: 
+            x: 70
+            y: -69
+            z: -15
+            yaw: 40
+        next_waypoints:
+            straight: mid3
+    
+    mid3:
+        transform: 
+            x: 185.6
+            y: -15.3
+            z: -24
+            yaw: 35
+        next_waypoints:
+            straight: second_sign

@@ -1,0 +1,47 @@
+python carla-test.py --instruction "Drive this vehicle to mine A."
+    Connected to neuralmagic/pixtral-12b-FP8-dynamic
+
+    Starting...
+    VLAM thinking...
+    VLAM output: {'reasoning': "Since there is no sign for the instructed destination 'Mine A', I will continue straight as per the given instruction to follow the main path until I encounter a sign for 'Mine A'.", 'direction': 'straight', 'destination_reached': False} 
+
+
+    Driving...
+    Waypoint has been reached.
+    VLAM thinking...
+    VLAM output: {'reasoning': 'The sign indicates a left turn to reach Mine A.', 'direction': 'left', 'destination_reached': False} 
+
+
+    Driving...
+    Waypoint has been reached.
+    VLAM thinking...
+    VLAM output: {'reasoning': "The sign in front of me clearly indicates 'Mine A' without any directional information, meaning I should proceed straight ahead as I have reached the destination.", 'direction': 'straight', 'destination_reached': True} 
+
+    Destination reached!
+
+---------------------------------------------------------------------------------------------------------------------
+python carla-test.py --instruction "Drive this vehicle to mine B."
+
+    Starting...
+    VLAM thinking...
+    VLAM output: {'destination_reached': False, 'direction': 'straight', 'reasoning': 'There is no sign, so I should keep going straight.'} 
+
+
+    Driving...
+    Location has been reached.
+    VLAM thinking...
+    VLAM output: {'destination_reached': False, 'direction': 'straight', 'reasoning': 'The current sign points to Mine A, which is not the destination. Therefore, I should continue straight.'} 
+
+
+    Driving...
+    Location has been reached.
+    VLAM thinking...
+    VLAM output: {'destination_reached': False, 'direction': 'right', 'reasoning': 'The sign indicates that Mine B is to the right.'} 
+
+
+    Driving...
+    Location has been reached.
+    VLAM thinking...
+    VLAM output: {'destination_reached': True, 'direction': 'straight', 'reasoning': 'The sign says Mine B, which is the destination.'} 
+
+    Destination reached!
