@@ -2,27 +2,23 @@ from pydantic_settings import BaseSettings
 
 class VLMDriveSettings(BaseSettings):
     # VLAM model settings
-    vlam_backend: str = "google" # google or vllm
-    vlam_temperature: float = 0.0
-    
-    # For vlam_backend="google"
-    google_api_key: str = ""
-    google_model_name: str = "gemini-2.0-flash-exp"
-    
-    # For vlam_backend="vllm"
-    vllm_api_key: str = "empty"  # Usually not needed
-    vllm_base_url: str = "http://localhost:8000/v1"
+    vlam_backend: str = "google"                        # VLAM backend, either google or vllm
+    vlam_temperature: float = 0.0                       # LLM temperature
+    google_api_key: str = ""                            # Only for google backend
+    google_model_name: str = "gemini-2.0-flash-exp"     # Only for google backend
+    vllm_base_url: str = "http://localhost:8000/v1"     # Only for vllm backend
+    vllm_api_key: str = "empty"                         # Only for vllm backend, usually not needed
 
     # Image settings
     save_images: bool = False
     show_images: bool = True
 
-    # Waypoint settings
+    # Waypoint settings (change only for custom maps)
     waypoint_file: str = "mine_waypoints.yaml"
     start_waypoint: str = "start"
     first_goal_waypoint: str = "first_sign"
 
-    # Simulation settings
+    # Simulation settings (change only for custom installations)
     carla_host: str = "localhost"
     carla_port: int = 2000
     carla_world_name: str = "/Game/Carla/Maps/Mine_01"
