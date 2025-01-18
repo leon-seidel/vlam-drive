@@ -2,21 +2,21 @@
 
 Demo of using Vision Language Action Models for autonomous navigation between waypoints using road signs. The user can give an instruction in natural language like:
 ```
-"Drive the vehicle to Mine C."
+"Drive the vehicle to Mine B."
 ```
 The VLAM receives an image at each waypoint and decides the direction to drive, if the destination has been reached and adds its reasoning. A waypoint handler translates this information into the next waypoint for a Carla agent. 
 
 ## Demo run
-![Demo Image](/media/mine_C-1.PNG)
-![Demo Image](/media/mine_C-2.PNG)
-![Demo Image](/media/mine_C-3.PNG)
-![Demo Image](/media/mine_C-4.PNG)
+![Demo Image](/media/mine_B-1.PNG)
+![Demo Image](/media/mine_B-2.PNG)
+![Demo Image](/media/mine_B-3.PNG)
+![Demo Image](/media/mine_B-4.PNG)
 
 ## Models
-This package can be used either with a cloud VLM via the Google AI API or a locally hosted model using an vLLM OpenAI endpoint. It implements structured JSON outputs for both backends to ensure correctly formatted responses. Tests with Google's `gemini-2.0-flash-exp` have been showing very reliable results, while also smaller VLMs like Pixtral-12B from Mistral AI worked most of the time. 
+This package can be used either with a cloud VLM via the Google AI API or a locally hosted model using an vLLM OpenAI endpoint. It implements structured JSON outputs for both backends to ensure correctly formatted responses. Tests with Google's `gemini-2.0-flash-exp` have been showing very reliable results, while also smaller VLMs like `Pixtral-12B` from Mistral AI worked most of the time. 
 
 ## Installation
-All tests have been done with Carla UE5 0.10.0 using Ubuntu 22.04 and Nvidia GPUs. As the road signs are added to the simulator, Carla has to be built from source with Unreal Editor. Follow the steps described [here](https://carla-ue5.readthedocs.io/en/latest/build_linux_ue5/) to build Carla UE5 on a Linux machine. Then add the signs from `carla/objects/` to the Mine01 simulation environment in Unreal editor. The Carla UE5 build should also install the `carla` Python package in the same version. Check if everything is working and continue with installing this packages: 
+All tests have been done with Carla UE5.5 0.10.0 using Ubuntu 22.04 and Nvidia GPUs. As the road signs are added to the simulator, Carla has to be built from source with Unreal Editor. Follow the steps described [here](https://carla-ue5.readthedocs.io/en/latest/build_linux_ue5/) to build Carla UE5.5 on a Linux machine. Then add the signs from `carla/objects/` to the Mine01 simulation environment in Unreal editor. The Carla UE5.5 build should also install the `carla` Python package in the same version. Check if everything is working and continue with installing this packages: 
 
 ```bash
 git clone https://github.com/leon-seidel/vlm-drive.git
@@ -26,7 +26,7 @@ pip install -e .
 ## Configuration
 First choose wheter to use the Google AI API or a self-hosted vLLM model as backend. In case of the Google API the `GOOGLE_API_KEY` has to be acquired from [here](https://aistudio.google.com/app/apikey). You can also choose one of the available Google models in `GOOGLE_MODEL_NAME`, all testing has been done with `gemini-2.0-flash-exp`. 
 
-When using vLLM the `VLLM_BASE_URL` might have to be configured when running on another machine or port. Running Mistral AI's Pixtral-12B has been tested and works with the given setup. This FP8 quantization of Pixtral runs on a single RTX 3090:
+When using vLLM the `VLLM_BASE_URL` might have to be configured when running on another machine or port. Running Mistral AI's `Pixtral-12B` has been tested and works with the given setup. This FP8 quantization of Pixtral runs on a single RTX 3090:
 ```bash
 vllm serve neuralmagic/pixtral-12b-FP8-dynamic --max-model-len 16384
 ```
@@ -46,7 +46,7 @@ SHOW_IMAGES=true                          # Show images with VLAM results
 ```
 
 ## Running
-Start Carla UE5 with:
+Start Carla UE5.5 with:
 ```bash
 ./CarlaUnreal.sh
 ```
@@ -56,3 +56,5 @@ You can then run the VLM drive navigation with a custom instruction in natural l
 ```python
 python run_vlm_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
+Happy driving!
+![Demo Image](/media/carla_sim_mine.png)
