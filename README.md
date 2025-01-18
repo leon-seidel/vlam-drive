@@ -53,7 +53,7 @@ Start Carla UE5.5 with:
 
 You can then run the VLM drive navigation with a custom instruction in natural language referring to the 3 available destinations `Mine A`, `Mine B` and `Mine C`:
 
-```python
+```bash
 python run_vlm_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
 Happy driving!
