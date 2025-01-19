@@ -4,7 +4,7 @@ Demo of using Vision Language Action Models for autonomous navigation between wa
 ```
 "Drive the vehicle to Mine B."
 ```
-The VLAM receives an image from an onboard camera at each waypoint and decides the direction to drive, determines if the destination has been reached and provides its reasoning. A waypoint handler translates this information into the next waypoint for a Carla agent, where the VLAM kicks in again. 
+The VLAM receives an onboard image at each waypoint and decides the direction to drive, determines if the destination has been reached and provides its reasoning. A waypoint handler translates this information into the next waypoint for a Carla agent, where the VLAM kicks in again. 
 
 ## Demo run
 ![Demo Image](/media/mine_B-1.PNG)
