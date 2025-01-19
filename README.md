@@ -58,4 +58,4 @@ python run_vlam_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
 Happy driving!
 
-![Demo Video](https://youtu.be/LhLbKN_zQRg?feature=shared)
+[Demo Video](https://youtu.be/LhLbKN_zQRg?feature=shared)
