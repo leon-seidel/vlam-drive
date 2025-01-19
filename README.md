@@ -19,8 +19,8 @@ This package can be used either with a cloud VLM via the Google AI API or a loca
 All tests have been done with Carla UE5.5 0.10.0 using Ubuntu 22.04 and Nvidia GPUs. Because the road signs are added to the simulator, Carla has to be built from source with Unreal Editor. Follow the steps described [here](https://carla-ue5.readthedocs.io/en/latest/build_linux_ue5/) to build Carla UE5.5 on a Linux machine. Then add the signs from `carla/objects/` to the Mine01 simulation environment in Unreal Editor. The Carla UE5.5 build should also install the `carla` Python package in the same version. Check if everything is working and continue with installing this package: 
 
 ```bash
-git clone https://github.com/leon-seidel/vlm-drive.git
-cd vlm-drive
+git clone https://github.com/leon-seidel/vlam-drive.git
+cd vlam-drive
 pip install -e .
 ```
 ## Configuration
@@ -54,6 +54,6 @@ Start Carla UE5.5 with:
 You can then run the VLM drive navigation with a custom instruction in natural language referring to the 3 available destinations `Mine A`, `Mine B` and `Mine C`:
 
 ```bash
-python run_vlm_drive.py --instruction "Please drive the vehicle to Mine A."
+python run_vlam_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
 Happy driving!
