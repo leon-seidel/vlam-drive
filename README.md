@@ -57,3 +57,5 @@ You can then run the VLM drive navigation with a custom instruction in natural l
 python run_vlam_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
 Happy driving!
+
+![Demo Video](/media/mine_B_compressed.mp4)
