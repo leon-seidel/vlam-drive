@@ -6,7 +6,9 @@ Demo of using Vision Language Action Models for autonomous navigation between wa
 ```
 The VLAM receives an onboard image at each waypoint and decides the direction to drive, determines if the destination has been reached and provides its reasoning. A waypoint handler translates this information into the next waypoint for a Carla agent, where the VLAM kicks in again. 
 
-## Demo run
+[Demo video](https://youtu.be/8v5u5qhVYBc)
+
+## Demo images with VLAM output
 ![Demo Image](/media/mine_B-1.PNG)
 ![Demo Image](/media/mine_B-2.PNG)
 ![Demo Image](/media/mine_B-3.PNG)
@@ -57,5 +59,3 @@ You can then run the VLM drive navigation with a custom instruction in natural l
 python run_vlam_drive.py --instruction "Please drive the vehicle to Mine A."
 ```
 Happy driving!
-
-[Demo Video](https://youtu.be/LhLbKN_zQRg?feature=shared)
