@@ -1,6 +1,6 @@
 # VLAM-based navigation for mining vehicles in Carla UE5.5 simulator
 ![Demo Image](/media/carla_sim_mine.png)
-Demo of using Vision Language Action Models for autonomous navigation between waypoints using simple road signs. The user can give an instruction in natural language like:
+Demo of using Vision Language Action Models for autonomous navigation between waypoints using simple road signs. Running the Mine01 offroad mining world in the new [Carla UE5.5](https://github.com/carla-simulator/carla/tree/ue5-dev) simulator. The user can give an instruction in natural language like:
 ```
 "Drive the vehicle to Mine B."
 ```
